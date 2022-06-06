@@ -1,22 +1,54 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "web": "expo start --web",
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/vector-icons": "^12.0.0",
+    "@react-native-async-storage/async-storage": "~1.15.0",
+    "@react-native-community/datetimepicker": "3.5.2",
+    "@react-navigation/bottom-tabs": "^6.0.5",
+    "@react-navigation/native": "^6.0.2",
+    "@react-navigation/stack": "^6.0.7",
+    "babel-plugin-module-resolver": "^3.2.0",
     "expo": "~42.0.1",
+    "expo-firebase-recaptcha": "^1.4.2",
+    "expo-image-picker": "~10.2.2",
+    "expo-notifications": "~0.12.3",
+    "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
+    "expo-task-manager": "~9.2.2",
+    "expo-updates": "~0.8.2",
+    "firebase": "8.2.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
-    "react-native-web": "~0.13.12"
+    "react-native": "0.63.4",
+    "react-native-alert-input": "^1.0.6",
+    "react-native-bouncy-checkbox": "^2.1.3",
+    "react-native-dropdown-picker": "^5.1.23",
+    "react-native-dynamic-tab-view": "^1.0.7-0",
+    "react-native-expandable-listview": "^1.3.1",
+    "react-native-expo-cached-image": "^1.3.1",
+    "react-native-gesture-handler": "~1.10.2",
+    "react-native-global-props": "^1.1.5",
+    "react-native-keyboard-aware-scroll-view": "^0.9.4",
+    "react-native-picker-checkbox": "^2.0.2",
+    "react-native-prompt-android": "^1.1.0",
+    "react-native-prompt-crossplatform": "^1.6.1",
+    "react-native-reanimated": "~2.2.0",
+    "react-native-safe-area-context": "3.2.0",
+    "react-native-screens": "~3.4.0",
+    "react-native-unimodules": "~0.14.5",
+    "react-native-web": "~0.13.12",
+    "react-native-webview": "11.6.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "~7.9.0"
   },
-  "private": true
+  "private": true,
+  "name": "uzifypartner",
+  "version": "1.0.0"
 }

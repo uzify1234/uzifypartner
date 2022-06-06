@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "561938980462",
+    "project_id": "uzifytest-33c07",
+    "storage_bucket": "uzifytest-33c07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561938980462:android:648b752ef903e91d73107f",
+        "android_client_info": {
+          "package_name": "com.priyesh1224.uzifypartner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561938980462-b8jdbrj8i7cdvnq5h5lf7kek8udvsup5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwtBQTNJFuZ3VD6y8hOi414mjUb4Hak1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561938980462-b8jdbrj8i7cdvnq5h5lf7kek8udvsup5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "561938980462-68mdll6fraqivje1g61e2b7vpnffugq7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.name.uzify"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561938980462:android:52e7da5cb0ba617373107f",
+        "android_client_info": {
+          "package_name": "com.uzify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561938980462-b8jdbrj8i7cdvnq5h5lf7kek8udvsup5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwtBQTNJFuZ3VD6y8hOi414mjUb4Hak1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561938980462-b8jdbrj8i7cdvnq5h5lf7kek8udvsup5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "561938980462-68mdll6fraqivje1g61e2b7vpnffugq7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.name.uzify"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

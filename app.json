@@ -2,7 +2,7 @@
   "expo": {
     "name": "uzifypartner",
     "slug": "uzifypartner",
-    "version": "1.0.0",
+    "version": "4.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,16 +17,37 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.uzify.uzifypartner"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "versionCode": 4,
+      "package": "com.priyesh1224.uzifypartner"
+    },
+    "notification": {
+      "icon": "./src/assets/images/notiflogo.png",
+      "color": "#ffffff",
+      "androidMode": "default",
+      "androidCollapsedTitle": "Updates",
+      "iosDisplayInForeground": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./src/assets/images/justoldlogo.png",
+          "color": "#ffffff",
+          "sounds": ["./src/assets/sounds/partner.mp3", "./src/assets/sounds/client.mp3"]
+          
+        }
+      ]
+    ]
   }
 }
