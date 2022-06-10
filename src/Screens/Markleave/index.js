@@ -35,14 +35,12 @@ const index = (props) => {
           const currentDate = selectedDate || date;
           setShow(Platform.OS === 'ios');
           setDate(currentDate);
-          console.log((Math.round((currentDate).getTime() / 1000)));
         };
 
         const onChange2 = (event, selectedDate) => {
             const currentDate = selectedDate || date2;
             setShow2(Platform.OS === 'ios');
             setDate2(currentDate);
-            console.log((Math.round((currentDate).getTime() / 1000)));
           };
       
         const showMode = (currentMode) => {
@@ -108,8 +106,6 @@ const index = (props) => {
            
         var sd = Math.round((date).getTime() / 1000);
         var ed = Math.round((date2).getTime() / 1000);
-        console.log(sd);
-        console.log(ed);
         if(sd > ed) {
         Alert.alert(
             "Start date can not be later to End date",
@@ -126,7 +122,6 @@ const index = (props) => {
         }else {
       
            var randleavetime = db.collection('partners').doc(currentuser.uid).collection('leavetime').doc().id;
-           console.log(randleavetime);
            var sd = Math.round((date).getTime() / 1000);
            var ed = Math.round((date2).getTime() / 1000);
            db.collection('partners').doc(currentuser.uid).collection('leavetime').doc(randleavetime).set({
@@ -149,13 +144,11 @@ const index = (props) => {
                 ]
               );
            }).catch(lverr => {
-            console.log(lverr);
            });
        }
     }
 }
 const deletethisleave = (leave) => {
-  console.log(leave);
   Alert.alert(
     "Are you sure you want to delete this leave ? ",
     "",
@@ -237,13 +230,11 @@ const deletethisleave = (leave) => {
         firebase.auth().onAuthStateChanged((user) => {
            if (user) {
              setcurrentuser(user);
-             console.log(user.uid);
              fetchleaves(user.uid);
      
            }
            else {
                setcurrentuser(null);
-               console.log('user not logged in')
            }
 
            

@@ -10,7 +10,6 @@ import { useNavigation } from '@react-navigation/native';
 import { LOGIN, UPCOMINGBOOKINGS, MYORDERS, EDITPROFILE, HELP, MYWALLET, ABOUTUZIFY, PASTBOOKINGS, CREDITSSCREEN, MARKLEAVE, PARTICULARBOOKING } from '../../Constants/routesName';
 import Loader from '../../components/Loader';
 import { Ionicons } from '@expo/vector-icons';
-import { withTiming } from 'react-native-reanimated';
 import Customtext from '../../components/Customtext';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
@@ -31,6 +30,7 @@ const index = () => {
     const [imageurl, setimageurl] = useState(null);
     const [currentuser, setcurrentuser] = useState(null);
     const [credits, setcredits] = useState(0);
+    const [partnerRatings, setPartnerRatings] = useState(0);
 
     const [needmorefetch, setneedmorefetch] = useState(false);
 
@@ -50,36 +50,28 @@ const index = () => {
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-              console.log('user logged with ');
-              console.log(user);
               setcurrentuser(user);
               setloadingscreen(true);
               db.collection('partners').doc(user.uid).get().then((df) => {
-                  console.log(df.data());
                   setimageurl(df.data().profileimage);
                   setname(df.data().name);
                   setimageurl(df.data().profileimage);
                   setloadingscreen(false);
                   setcredits(df.data().credits);
-                  console.log("Image url");
-                  console.log(df.data().profileimageeurl);
+                  setPartnerRatings(df.data().partnerrating);
               }).catch(err => {
                 setloadingscreen(false);
-                console.log(err);
               });
             }
             else {
-                console.log('user not logged in')
             }
          });
     }, [needmorefetch])
 
     const logoutuser = () => {
         firebase.auth().signOut().then(() => {
-            console.log("User Logged Out");
             navigation.navigate(LOGIN);
         }).catch(e => {
-            console.log(e);
         });
     }
     return (
@@ -97,7 +89,9 @@ const index = () => {
                         </TouchableOpacity>
                         <View>
                         <Customtext type='light' style={{fontSize : 18, fontWeight : '800',color : DEEPPINK,marginTop : 8,textAlign : 'right'}}>{name}</Customtext>
-                        <Customtext type='light' style={{fontSize : 16, fontWeight : '700',color : 'black',marginTop : 8,textAlign : 'right'}}>{Math.round(credits * 100) / 100} Credits</Customtext>
+                        <Customtext type='light' style={{fontSize : 14, fontWeight : '700',color : 'black',marginTop : 8,textAlign : 'right'}}>{Math.round(credits * 100) / 100} Credits</Customtext>
+                        <Customtext type='light' style={{fontSize : 14, fontWeight : '700',color : 'black',marginTop : 8,textAlign : 'right'}}>Ratings: {partnerRatings}</Customtext>
+
                         </View>
                     </View>
  
@@ -121,7 +115,7 @@ const index = () => {
                         <TouchableOpacity  onPress={() => navigation.navigate(MARKLEAVE)} style={{marginBottom : 12,display : 'flex' , alignItems : 'center',flexDirection : 'row',borderRightColor : 'transparent',borderLeftColor : 'transparent' , borderTopColor : 'transparent', borderBottomColor : LIGHTPINK, borderWidth : 1,paddingBottom : 7}}><MaterialIcons name="ios-share" size={24} color={DEEPPINK} /><Customtext type='light' style={{marginLeft : 8, fontWeight : '700'}}>My Leaves</Customtext></TouchableOpacity>
                         
                         <TouchableOpacity style={{marginBottom : 12,display : 'flex' , alignItems : 'center',flexDirection : 'row',borderRightColor : 'transparent',borderLeftColor : 'transparent' , borderTopColor : 'transparent', borderBottomColor : LIGHTPINK, borderWidth : 1,paddingBottom : 7}}><MaterialIcons name="ios-share" size={24} color={DEEPPINK} /><Customtext type='light' style={{marginLeft : 8, fontWeight : '700'}}>Share Uzify</Customtext></TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate(PARTICULARBOOKING,{bookingid : '7Y76j2PrdHhZNRXMh7CS'})}  style={{marginBottom : 12,display : 'flex' , alignItems : 'center',flexDirection : 'row',borderRightColor : 'transparent',borderLeftColor : 'transparent' , borderTopColor : 'transparent', borderBottomColor : LIGHTPINK, borderWidth : 1,paddingBottom : 7}}><MaterialIcons name="star-rate" size={24} color={DEEPPINK} /><Customtext type='light' style={{marginLeft : 8, fontWeight : '700'}}>Rate Uzify</Customtext></TouchableOpacity>
+                        {/* <TouchableOpacity onPress={() => navigation.navigate(PARTICULARBOOKING,{bookingid : '7Y76j2PrdHhZNRXMh7CS'})}  style={{marginBottom : 12,display : 'flex' , alignItems : 'center',flexDirection : 'row',borderRightColor : 'transparent',borderLeftColor : 'transparent' , borderTopColor : 'transparent', borderBottomColor : LIGHTPINK, borderWidth : 1,paddingBottom : 7}}><MaterialIcons name="star-rate" size={24} color={DEEPPINK} /><Customtext type='light' style={{marginLeft : 8, fontWeight : '700'}}>Rate Uzify</Customtext></TouchableOpacity> */}
                         <TouchableOpacity onPress={logoutuser} style={{marginBottom : 12,display : 'flex' , alignItems : 'center',flexDirection : 'row',borderRightColor : 'transparent',borderLeftColor : 'transparent' , borderTopColor : 'transparent', borderBottomColor : LIGHTPINK, borderWidth : 1,paddingBottom : 7}}><MaterialCommunityIcons name="logout" size={24} color={DEEPPINK} /><Customtext type='light' style={{marginLeft : 8, fontWeight : '700'}}>Logout</Customtext></TouchableOpacity>
 
                     </View>

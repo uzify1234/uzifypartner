@@ -40,9 +40,7 @@ const index = () => {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
               setcurrentuser(user);
-              console.log(user.uid);
               db.collection('partners').doc(user.uid).get().then((df) => {
-                  console.log(user.uid);
                 setcurrentcredits(df.data().credits);
                 db.collection('partners').doc(user.uid).collection('creditshistory').orderBy('receivedon','desc').get().then(crehist => {
                     var tmp = [];
@@ -84,12 +82,10 @@ const index = () => {
 
                 })
               }).catch(err => {
-                console.log(err);
               });
             }
             else {
                 setcurrentuser(null);
-                console.log('user not logged in')
             }
 
             

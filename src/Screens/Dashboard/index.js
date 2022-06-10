@@ -39,15 +39,19 @@ const index = () => {
         const [finalstatusnotif, setfinalstatusnotif] = useState(null);
         const [ExpoPushToken, setExpoPushToken] = useState(null);
 
+        useEffect(() => {
+          if(currentuser) {
+   
+          }
+        },[currentuser]);
+
 
         async function registerForPushNotificationsAsync() {
-          console.log("Atleast Called");
             let token;
             if (Constants.isDevice) {
               const { status: existingStatus } = await Notifications.getPermissionsAsync();
               let finalStatus = existingStatus;
               setfinalstatusnotif(existingStatus);
-              console.log("Cp A "+finalStatus);
               if (existingStatus !== 'granted') {
                 const { status } = await Notifications.requestPermissionsAsync();
                 finalStatus = status;
@@ -57,7 +61,6 @@ const index = () => {
                 return;
               }
               token = (await Notifications.getExpoPushTokenAsync()).data;
-              console.log(token);
             } else {
               setfinalstatusnotif('');
               alert('Must use physical device for Push Notifications');
@@ -89,8 +92,6 @@ const index = () => {
       }
       const secondsToHms = (d,e) => {
         d = Number(d) - Number(e);
-        console.log("Difference");
-        console.log(d);
         var h = Math.floor(d / 3600);
         var m = Math.floor(d % 3600 / 60);
         var s = Math.floor(d % 3600 % 60);
@@ -115,10 +116,8 @@ const index = () => {
             sstl = sstl + 12;
         }
         var generatingstring = selecteddate+' '+sstl+':00:00';
-        console.log(generatingstring);
         var date = new Date(...getParsedDate(generatingstring));
         var modifieddate = date + (5.5 * 60 * 60);
-        console.log(modifieddate);
         return (Math.round((date).getTime() / 1000));
         
       }
@@ -162,7 +161,6 @@ const index = () => {
       }
 
     const acceptbookingtapped = (item) => {
-        console.log(allqueueorders);
         var today = Math.round((new Date()).getTime() / 1000);
         var totaltime = 0;
        
@@ -171,7 +169,6 @@ const index = () => {
        
         
         item.data.cart.map(eachcart => {
-            console.log("Considering "+Number(eachcart.servicetime))
             totaltime = totaltime + Number(eachcart.servicetime);
         })
         if(item.freeitem != null ) {
@@ -181,10 +178,8 @@ const index = () => {
             totaltime = 120;
         }
         var endddts = ddts + (totaltime * 60);
-        console.log("Total service time is "+totaltime);
         var condstarttime = item.data.starttimeepoc;
         var coend = condstarttime + (totaltime * 60);
-        console.log("Total service time is "+totaltime+ " and credits required is "+Number(item.mincredits)+" and start time is "+condstarttime+" and end time is "+coend);
         db.collection('partners').doc(currentuser.uid).collection('worktime').get().then(allwt => {
             var evenfound = true;
             allwt.docs.map(eachdoct => {
@@ -211,7 +206,6 @@ const index = () => {
                   );
             }
             else if(Number(today) >= Number(item.startshowtime) && Number(today) <= Number(item.endshowtime)) {
-                console.log("booking accepted");
                 db.collection('orders').doc(item.id).update({
                     assignedpartner : currentuser.uid,
                     haspartnerapproved : true
@@ -249,6 +243,7 @@ const index = () => {
                                              
                                             ]
                                           );
+                                          
                                     }).catch(ercred => {
             
                                     })
@@ -272,7 +267,6 @@ const index = () => {
                 })
             }
             else {
-                console.log("Cant accept booking");
                 Alert.alert(
                     "Booking can not be Accepted",
                     "",
@@ -384,7 +378,7 @@ const index = () => {
           <Customtext type='light' style={{fontWeight : '700',marginTop : 10}}>Pincode : {item.data.personpincode}</Customtext>
           <Customtext type='light' style={{fontWeight : '700',marginTop : 10}}>Category : {item.data.categoryname}</Customtext>
           <Customtext type='light' style={{fontWeight : '700',marginTop : 10}}>Net Amount of Order : Rs {item.data.netamount}</Customtext>
-          <TouchableOpacity onPress={() => {item.status == 'pending' ? acceptbookingtapped(item) : ""}} style={{padding : 10,borderRadius : 5,backgroundColor : DEEPPINK,margin : 20}}><Customtext type='light' style={{fontWeight : '800',textAlign : 'center',color : 'white'}}>{item.data.status == 'pending' ? 'Start Service' : item.data.status == 'running' ? 'Stop Service' : item.data.status == 'cancelledbyuser' ? 'Cancelled By Customer' : item.data.status == 'cancelledbypartner' ? 'Cancelled':item.data.status == 'cancelledbyadmin' ? 'Cancelled' : 'Completed'}</Customtext></TouchableOpacity>
+          {/* <TouchableOpacity onPress={() => {item.status == 'pending' ? acceptbookingtapped(item) : ""}} style={{padding : 10,borderRadius : 5,backgroundColor : DEEPPINK,margin : 20}}><Customtext type='light' style={{fontWeight : '800',textAlign : 'center',color : 'white'}}>{item.data.status == 'pending' ? 'Start Service' : item.data.status == 'running' ? 'Stop Service' : item.data.status == 'cancelledbyuser' ? 'Cancelled By Customer' : item.data.status == 'cancelledbypartner' ? 'Cancelled':item.data.status == 'cancelledbyadmin' ? 'Cancelled' : 'Completed'}</Customtext></TouchableOpacity> */}
           {/* <Customtext type='light' style={{fontWeight : '700',marginTop : 10}}>You can accept this booking in {secondsToHms(item.endshowtime,item.startshowtime)}</Customtext> */}
           <TouchableOpacity onPress={() => viewbookingtapped(item)} style={{padding : 10,borderRadius : 5,backgroundColor : DEEPPINK,margin : 20}}><Customtext type='light' style={{fontWeight : '800',textAlign : 'center',color : 'white'}}>View Booking</Customtext></TouchableOpacity>
           <Customtext type='light' style={{marginBottom : 10}}>Placed on : {passit(new Date(item.data.placedon * 1000))}</Customtext>
@@ -406,50 +400,28 @@ const index = () => {
 
       const getmeorders = (user) => {
         var today = Math.round((new Date()).getTime() / 1000);
-        console.log(today);
         setloadingscreen(true);
-        console.log("start from here "+user.uid);
         db.collection('partners').doc(user.uid).collection('bookingsonqueue').onSnapshot((allqueues) => {
-            console.log("GET ME ORDERS Latest");
             var tmporders = [];
             var allproms = [];
 
             // setallqueueorders([]);
             allqueues.forEach((doc) => {
-                console.log("Check it");
-                console.log(doc.id);
                 var xyz = new Promise((resolve, reject) => { 
                 db.collection('orders').doc(doc.id).get().then(fgh => {
-                    var x = {id : fgh.id , data : fgh.data(),startshowtime : Number(doc.data().startshowtime) , endshowtime : Number(doc.data().endshowtime),mincredits : Number(doc.data().mincredits),eligibletodisplay : false};
-                    console.log("Has partner approved "+doc.id);
-                    console.log(fgh.data().haspartnerapproved);
-                    
-                    if(fgh.data().haspartnerapproved == undefined) {
-                        console.log("Has partner approved "+doc.id);
-                        console.log(fgh.data().haspartnerapproved);
-                    }
-                    else if(fgh.data().haspartnerapproved == false || fgh.data().haspartnerapproved == 'false') {
-                        console.log("Or Is it printing from here");
-
+                    var x = {id : fgh.id , data : fgh.data(),startshowtime : Number(doc.data().startshowtime) , endshowtime : Number(doc.data().endshowtime),mincredits : Number(doc.data().mincredits),eligibletodisplay : false};                    
+                   if(fgh.data().haspartnerapproved == undefined || fgh.data().haspartnerapproved == false || fgh.data().haspartnerapproved == 'false') {
                     var fggh = allqueueorders.filter(llo => llo.id == fgh.id);
-                    console.log("Lets check");
                     if(Number(today) >= Number(doc.data().startshowtime) && Number(today) <= Number(doc.data().endshowtime)) {
                         x.eligibletodisplay = true;
-                        // var copy = allqueueorders;
-                        // copy.push(x);
-                        // console.log("Found this "+x.id);
-                        // console.log(x.data.netamount);
-                        
                     }
                     else {
                         x.eligibletodisplay = false;
-                        console.log("Does not fullfill");
                     }
                     }
                     resolve(x);
                     tmporders.push(x);
                 }).catch(erf => {
-                    console.log(erf);
                     reject(erf);
                 })
 
@@ -461,15 +433,11 @@ const index = () => {
 
                 allres = allres.sort((a, b) => (Number(a.data.placedon) > Number(b.data.placedon)) ? -1 : 1);
                 allres = allres.filter(eres => eres.eligibletodisplay == true);
-                allres.map(each => {
-                    console.log(each.id);
-                })
                 setallqueueorders(allres);
                 setloadingscreen(false);
                 findmeupcomingorders(user);
             }).catch(promerr => {
-                console.log("Is it printing from here");
-                console.log(promerr);
+
             })
             setloadingscreen(false);
             
@@ -486,18 +454,14 @@ const index = () => {
                 db.collection('orders').doc(eachupc.id).get().then(fgh => {
                 // if(fgh.data().status != "completed") {
                 var x = {id : fgh.id , data : fgh.data()};
-                console.log("Start booking date");
-                console.log(formatDate(new Date(fgh.data().selecteddate)));
+   
                 var copy = allupcmings;
                 copy.push(x);
-                // console.log("Got upcoming latest one");
-                // console.log(x.id);
                 resolve(x);
 
                 // }
                 
             }).catch(erf => {
-                console.log(erf);
                 reject(erf);
                 setloadingscreen(false);
             })
@@ -506,15 +470,12 @@ const index = () => {
         allproms.push(xyz);
         })
 
-        console.log("Promise ???")
         Promise.all(allproms).then(allres => {
-            console.log("Promise Lets check it here ");
             allres = allres.sort((a, b) => (Number(a.data.placedon) > Number(b.data.placedon)) ? -1 : 1);
 
             setallupcmings(allres);
             findmeallpast(user);
         }).catch(promerr => {
-            console.log(promerr);
         })
         
     }).catch(efg => {
@@ -530,17 +491,13 @@ const index = () => {
                 db.collection('orders').doc(eachupc.id).get().then(fgh => {
                 // if(fgh.data().status != "completed") {
                 var x = {id : fgh.id , data : fgh.data()};
-                console.log("Start booking date");
                 var copy = allpast;
                 copy.push(x);
-                // console.log("Got upcoming latest one");
-                // console.log(x.id);
                 resolve(x);
 
                 // }
                 
             }).catch(erf => {
-                console.log(erf);
                 reject(erf);
                 setloadingscreen(false);
             })
@@ -549,15 +506,12 @@ const index = () => {
         allproms.push(xyz);
         })
 
-        console.log("Promise ???")
         Promise.all(allproms).then(allres => {
-            console.log("Promise Lets check it here ");
             allres = allres.sort((a, b) => (Number(a.data.placedon) > Number(b.data.placedon)) ? -1 : 1);
 
             setallpast(allres);
             findmeallmissed(user);
         }).catch(promerr => {
-            console.log(promerr);
         })
         
     }).catch(efg => {
@@ -567,13 +521,16 @@ const index = () => {
 
 
      const findmeallmissed = (user) => {
+      var today = Math.round((new Date()).getTime() / 1000);
       db.collection('orders').where("attemptedpartnersarray", "array-contains",user.uid).where('assignedpartner',"!=",user.uid).get().then(alldocs => {
         var tmp = [];
         alldocs.docs.map(eachdoc => {
+
+          if(Number(today) >= Number(eachdoc.data().starttimeepoc) && Number(today) <= Number(eachdoc.data().endtimeepoc)) { } else if(Number(today) >= Number(eachdoc.data().starttimeepoc)) {
            var x = {id : eachdoc.id , data : eachdoc.data()};
           tmp.push(x);
-          console.log("MISSED");
-          console.log(x.id);
+
+          }
         })
         setloadingscreen(false);
         setallmissed(tmp);
@@ -595,32 +552,24 @@ const index = () => {
             if (user) {
               setcurrentuser(user);
               registerForPushNotificationsAsync().then(token => {
-
-                console.log("Here i obtain token");
-                console.log(token);
-                console.log(user.uid);
                 if(token != undefined) {
                 db.collection('partners').doc(user.uid).update({notificationtoken : token});
                 setExpoPushToken(token);
                 }
 
               db.collection('partners').doc(user.uid).get().then((df) => {
-                  console.log("---------------------------");
  
                   if(df.data().isactive == false) {
-                    console.log("Partner Blocked");
                     firebase.auth().signOut().then(() => {
-                        console.log("User Logged Out");
                         navigation.navigate(LOGIN);
                     }).catch(e => {
-                        console.log(e);
                     });
                   }
                   else {
                     setcurrentusername(df.data().name);
                     setcurrentuserimage(df.data().profileimage);
                     setcurrentusercredits(Number(df.data().credits));
-                    console.log("user exists");
+         
                     getmeorders(user);
                     
                     
@@ -650,14 +599,12 @@ const index = () => {
                   
                   
               }).catch(err => {
-                console.log(err);
               });
 
             });
             }
             else {
                 setcurrentuser(null);
-                console.log('user not logged in')
             }
 
             
@@ -675,7 +622,6 @@ const index = () => {
             setallimagesdata(tmparr);
         })
         .catch((error) => {
-            console.log("Error getting documents: ", error);
         });
 
 

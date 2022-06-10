@@ -28,10 +28,6 @@ const ExpandableComponent = ({item, onClickFunction,content, selectedpincodes,se
       setLayoutHeight(0);
     }
 
-console.log("All the data");
-console.log(allavailablepincodes);
-
-
   }, [item.isExpanded]);
 
   return (
@@ -74,10 +70,6 @@ console.log(allavailablepincodes);
                     }
                     copy.push(y);
                     setselectedpincodes(y);
-                    console.log(y);
-
-
-
                   } 
                   else {
                     var hf = selectedpincodes.filter(eg => eg.id == item.id );
@@ -134,10 +126,6 @@ const App = ({content, selectedpincodes,setselectedpincodes , allavailablepincod
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }
 
-  useEffect(() => {
-    console.log("Obtained");
-    console.log(content);
-  }, [])
 
   const updateLayout = (index) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);

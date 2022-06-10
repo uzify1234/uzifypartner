@@ -63,7 +63,6 @@ const [imageuploadstatus, setimageuploadstatus] = useState("");
         const result = await ImagePicker.launchCameraAsync();
     
         // Explore the result
-        console.log(result);
     
         if (!result.cancelled) {
           setimagenewpath(result.uri);
@@ -91,7 +90,6 @@ const [imageuploadstatus, setimageuploadstatus] = useState("");
                       alert('Profile Picture Updated');
                       props.route.params.setneedmorefetch(!props.route.params.needmorefetch);
                   }).catch((eee) => {
-                      console.log(eee);
                       setloadingscreen(false);
                       setimageuploading(false);
                   })
@@ -102,7 +100,6 @@ const [imageuploadstatus, setimageuploadstatus] = useState("");
               
               
           }).catch((e) => {
-              console.log('uploading image error => ', e);
               setimageuploadstatus('Something went wrong');
               setimageuploading(false);
               setloadingscreen(false);
@@ -142,7 +139,6 @@ const [imageuploadstatus, setimageuploadstatus] = useState("");
           quality: 1,
         });
     
-        console.log(result);
     
         if (!result.cancelled) {
             setimagenewpath(result.uri);
@@ -159,7 +155,6 @@ const [imageuploadstatus, setimageuploadstatus] = useState("");
         
             setloadingscreen(true);
             task.put(blob).then(() => {
-                console.log('Image uploaded to the bucket! ');
                 task.getDownloadURL().then((url) => { console.log(url)
                     db.collection('partners').doc(currentuser.uid).update({
                         profileimage : url
@@ -170,7 +165,6 @@ const [imageuploadstatus, setimageuploadstatus] = useState("");
                         alert('Profile Picture Updated');
                         props.route.params.setneedmorefetch(!props.route.params.needmorefetch);
                     }).catch((eee) => {
-                        console.log(eee);
                         setloadingscreen(false);
                         setimageuploading(false);
                     })
@@ -181,7 +175,6 @@ const [imageuploadstatus, setimageuploadstatus] = useState("");
                 
                 
             }).catch((e) => {
-                console.log('uploading image error => ', e);
                 setimageuploadstatus('Something went wrong');
                 setimageuploading(false);
                 setloadingscreen(false);
@@ -219,13 +212,11 @@ const [imageuploadstatus, setimageuploadstatus] = useState("");
                 
                  setloadingscreen(false);
              }).catch(err => {
-               console.log(err);
                setloadingscreen(false);
              });
            }
            else {
                setcurrentuser(null);
-               console.log('user not logged in')
            }
         });
 

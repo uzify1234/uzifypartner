@@ -22,3 +22,4 @@ export const RECHARGESCREEN = 'Rechargescreen';
 export const MARKLEAVE = 'Markleave';
 export const SPLASHSCREEN = 'Splashscreen';
 export const PARTICULARBOOKING = 'Particularbooking';
+export const LOGINCLONE = 'Loginclone';

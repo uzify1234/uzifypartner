@@ -82,7 +82,6 @@ const index = (props) => {
         setpartnerauthid(props.route.params.partnerid);
         const userid = props.route.params.partnerid;
         db.collection('partners').doc(userid).get().then(info => {
-            console.log(info.data());
             if(info.data() !== undefined) {
             setalreadyexistingdata(info.data());
             onChangeState(info.data().state);
@@ -99,7 +98,6 @@ const index = (props) => {
             }
        
         }).catch(e => {
-            console.log("ERR")
         })
     }, [])
 
@@ -150,7 +148,6 @@ const index = (props) => {
             setgendererror(true);
         }
         else if(state == alreadyexistingdata.state && value == alreadyexistingdata.areyoua  && value2 == alreadyexistingdata.gender && city == alreadyexistingdata.city && alreadyexistingdata.aboutme == aboutme && alternatenumber == alreadyexistingdata.alternatenumber && workexperience == alreadyexistingdata.workexperience && alreadyexistingdata.brandspossess == brandspossess ) {
-            console.log("No need to upload");
             navigation.navigate(BANKDETAILS , {partnerid : partnerauthid});
 
         }
@@ -165,7 +162,6 @@ const index = (props) => {
     const lastupload = () => {
         const userid = partnerauthid;
         setloadingscreen(true);
-        console.log(value);
         if(fblink == undefined) {
             onChangeFblink("");
         }
@@ -192,7 +188,6 @@ const index = (props) => {
             setloadingscreen(false);
             navigation.navigate(BANKDETAILS , {partnerid : partnerauthid});
         }).catch(ee => {
-            console.log(ee);
             setloadingscreen(false);
         })
     }

@@ -13,5 +13,5 @@ plugins: [
         assets: './src/assets',
       },
     },
-  ],
+  ]
 ]

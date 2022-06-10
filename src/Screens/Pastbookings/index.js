@@ -55,8 +55,6 @@ const index = () => {
         }
         const secondsToHms = (d,e) => {
           d = Number(d) - Number(e);
-          console.log("Difference");
-          console.log(d);
           var h = Math.floor(d / 3600);
           var m = Math.floor(d % 3600 / 60);
           var s = Math.floor(d % 3600 % 60);
@@ -82,10 +80,8 @@ const index = () => {
             sstl = sstl + 12;
         }
         var generatingstring = selecteddate+' '+sstl+':00:00';
-        console.log(generatingstring);
         var date = new Date(...getParsedDate(generatingstring));
         var modifieddate = date + (5.5 * 60 * 60);
-        console.log(modifieddate);
         return (Math.round((date).getTime() / 1000));
         
       }
@@ -115,7 +111,6 @@ const index = () => {
                         }
                         
                     }).catch(erf => {
-                        console.log(erf);
                     })
                 })
                 setloadingscreen(false);

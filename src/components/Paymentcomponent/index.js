@@ -17,7 +17,6 @@ class Paymentcomponent extends React.Component {
 
   render() {
     const getMagicResponse2 = (resp) => {
-        console.log(resp);
             if (resp.status === 'success') {
                 //do whatever u want
             }

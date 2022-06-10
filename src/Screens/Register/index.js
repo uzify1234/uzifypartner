@@ -72,13 +72,11 @@ const index = (props) => {
     const [notificationtoken, setnotificationtoken] = useState("");
 
     async function registerForPushNotificationsAsync() {
-        console.log("Atleast Called");
           let token;
           if (Constants.isDevice) {
             const { status: existingStatus } = await Notifications.getPermissionsAsync();
             let finalStatus = existingStatus;
             setfinalstatusnotif(existingStatus);
-            console.log("Cp A "+finalStatus);
             if (existingStatus !== 'granted') {
               const { status } = await Notifications.requestPermissionsAsync();
               finalStatus = status;
@@ -88,7 +86,6 @@ const index = (props) => {
               return;
             }
             token = (await Notifications.getExpoPushTokenAsync()).data;
-            console.log(token);
           } else {
             setfinalstatusnotif('');
             alert('Must use physical device for Push Notifications');
@@ -118,7 +115,6 @@ const index = (props) => {
         setloadingscreen(true);
         db.collection('partners').doc(userid).get().then(info => {
             setloadingscreen(false);
-            console.log(info.data());
             setalreadyexistingdata(info.data());
             onChangeName(info.data().name);
             onChangeEmail(info.data().email);
@@ -131,11 +127,8 @@ const index = (props) => {
             setdownloadbackimageurl(info.data().backimage);
             setdownloadprofileimageurl(info.data().profileimage);
             setValue(info.data().documenttype);
-            console.log("Profile Image");
-            console.log(info.data().profileimage);
         }).catch(e => {
             setloadingscreen(false);
-            console.log("ERR")
         })
     }, [])
 
@@ -178,7 +171,6 @@ const index = (props) => {
             setDocumentnumbererror(true);
         }
         else if(alreadyexistingdata !== undefined && name == alreadyexistingdata.name && email == alreadyexistingdata.email && value == alreadyexistingdata.documenttype &&  address == alreadyexistingdata.address && alreadyexistingdata.aadharnumber == aadharnumber && datachangedbackimage == false && datachangedfrontimage == false && datachangedprofileimage == false) {
-            console.log("No need to upload");
             navigation.navigate(CITIESPICKER , {partnerid : partnerauthid});
 
         }
@@ -207,17 +199,13 @@ const index = (props) => {
         
             setloadingscreen(true);
             task.put(blob).then(() => {
-                console.log('Image uploaded to the bucket! 1');
                 task.getDownloadURL().then((url1) => { 
-                    console.log("Profile URL");
-                    console.log(url1)
                     setdownloadprofileimageurl(url1);
                     settempcheck(url1);
                     uploadfrontimage(url1);
                 })
                 setmessage('Image uploaded successfully '+task.getDownloadURL() );
             }).catch((e) => {
-                console.log('uploading image error => ', e);
                 setmessage('Something went wrong');
                 setimageuploading(false);
                 setloadingscreen(false);
@@ -244,16 +232,12 @@ const index = (props) => {
         
             setloadingscreen(true);
             task.put(blob).then(() => {
-                console.log('Image uploaded to the bucket! 2');
                 task.getDownloadURL().then((url2) => { 
-                    console.log("Front URL");
-                    console.log(url2)
                     setdownloadfrontimageurl(url2);
                     uploadbackimage(aa,url2);
                 })
                 setmessage('Image uploaded successfully '+task.getDownloadURL() );
             }).catch((e) => {
-                console.log('uploading image error => ', e);
                 setmessage('Something went wrong');
                 setimageuploading(false);
                 setloadingscreen(false);
@@ -280,16 +264,12 @@ const index = (props) => {
         
             setloadingscreen(true);
             task.put(blob).then(() => {
-                console.log('Image uploaded to the bucket! 3');
                 task.getDownloadURL().then((url3) => { 
-                    console.log("Back URL");
-                    console.log(url3)
                     setdownloadbackimageurl(url3);
                     lastupload(aa,bb,url3);
                 })
                 setmessage('Image uploaded successfully '+task.getDownloadURL() );
             }).catch((e) => {
-                console.log('uploading image error => ', e);
                 setmessage('Something went wrong');
                 setimageuploading(false);
                 setloadingscreen(false);
@@ -301,12 +281,10 @@ const index = (props) => {
 
     const lastupload = (aa,bb,cc) => {
         const userid = partnerauthid;
-        console.log("Profile image url is "+downloadprofileimageurl+" and "+tempcheck);
         
         setloadingscreen(true);
         db.collection('partners').doc(userid).get().then(docSnapshot => {
             if (docSnapshot.exists) {
-              console.log("Exist");
               db.collection('partners').doc(userid).update({
                 name : name,
                 email : email,
@@ -324,12 +302,10 @@ const index = (props) => {
                 setloadingscreen(false);
                 navigation.navigate(CITIESPICKER , {partnerid : partnerauthid});
             }).catch(ee => {
-                console.log(ee);
                 setloadingscreen(false);
             })
             }
             else {
-                console.log("Not Exist");
                 setloadingscreen(true);
                 db.collection('partners').doc(userid).set({
                     name : name,
@@ -349,7 +325,6 @@ const index = (props) => {
                     setloadingscreen(false);
                     navigation.navigate(CITIESPICKER , {partnerid : partnerauthid});
                 }).catch(ee => {
-                    console.log(ee);
                     setloadingscreen(false);
                 })
             }
@@ -370,7 +345,6 @@ const index = (props) => {
         const result = await ImagePicker.launchCameraAsync();
     
         // Explore the result
-        console.log(result);
     
         if (!result.cancelled) {
             setdatachangedprofileimage(true);
@@ -394,7 +368,6 @@ const index = (props) => {
           quality: 1,
         });
     
-        console.log(result);
     
         if (!result.cancelled) {
             setdatachangedprofileimage(true);
@@ -439,7 +412,6 @@ const index = (props) => {
         const result = await ImagePicker.launchCameraAsync();
     
         // Explore the result
-        console.log(result);
     
         if (!result.cancelled) {
             setdatachangedfrontimage(true);
@@ -479,7 +451,6 @@ const index = (props) => {
         const result = await ImagePicker.launchCameraAsync();
     
         // Explore the result
-        console.log(result);
     
         if (!result.cancelled) {
             setdatachangedbackimage(true);

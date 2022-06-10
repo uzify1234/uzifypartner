@@ -2,8 +2,9 @@ import React , {useEffect , useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {CATEGORIESPICKER, LOGIN, REGISTER,CITIESPICKER, PINCODESPICKER, GENERALINFO, BANKDETAILS, WORKIMAGESPORTAL,WORKEACHALBUM, DATAFILLCOMPLETED, ADMINREPORTING, DASHBOARD, CERTIFICATEIMAGESPORTAL, CERTIFICATEEACHALBUM, PROFILE, EDITPROFILE, UPCOMINGBOOKINGS, VIEWBOOKING, PASTBOOKINGS, CREDITSSCREEN, RECHARGESCREEN, MARKLEAVE, SPLASHSCREEN, PARTICULARBOOKING} from '../Constants/routesName';
+import {CATEGORIESPICKER, LOGIN, REGISTER,CITIESPICKER, PINCODESPICKER, GENERALINFO, BANKDETAILS, WORKIMAGESPORTAL,WORKEACHALBUM, DATAFILLCOMPLETED, ADMINREPORTING, DASHBOARD, CERTIFICATEIMAGESPORTAL, CERTIFICATEEACHALBUM, PROFILE, EDITPROFILE, UPCOMINGBOOKINGS, VIEWBOOKING, PASTBOOKINGS, CREDITSSCREEN, RECHARGESCREEN, MARKLEAVE, SPLASHSCREEN, PARTICULARBOOKING, LOGINCLONE} from '../Constants/routesName';
 import Login from '../Screens/Login';
+import Loginclone from '../Screens/Loginclone';
 import Register from '../Screens/Register';
 import Categoriespicker from '../Screens/Categoriespicker';
 import Citiespicker from '../Screens/Citiespicker';
@@ -48,6 +49,7 @@ const AuthNavigator = () => {
         
         <AuthStack.Navigator initialRouteName={SPLASHSCREEN} screenOptions={{headerShown:false}}>
             <AuthStack.Screen name={LOGIN} component={Login} ></AuthStack.Screen> 
+            <AuthStack.Screen name={LOGINCLONE} component={Loginclone} ></AuthStack.Screen> 
             <AuthStack.Screen name={REGISTER} component={Register} ></AuthStack.Screen> 
             <AuthStack.Screen name={CATEGORIESPICKER} component={Categoriespicker} ></AuthStack.Screen>
             <AuthStack.Screen name={CITIESPICKER} component={Citiespicker} ></AuthStack.Screen>  

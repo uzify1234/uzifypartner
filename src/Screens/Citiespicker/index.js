@@ -39,10 +39,8 @@ const index = (props) => {
    
 
     const cattapped = (item) => {
-        console.log(item);
         setanythingchanged(true);
          var fm = selectedcities.filter(ef => ef.id == item.id);
-         console.log(fm.length);
          var copy = selectedcities;
          if(fm.length == 0) {
             copy.push(item);
@@ -75,9 +73,7 @@ const index = (props) => {
         const userid = props.route.params.partnerid;
         setloadingscreen(true);
         db.collection('partners').doc(userid).get().then(info => {
-            console.log(info.data());
             setalreadyexistingdata(info.data());
-            console.log(info.data().selectedcities);
             if(info.data().selectedcities !== undefined) {
             //   setselectedcities(info.data().selectedcities);
             }
@@ -87,7 +83,6 @@ const index = (props) => {
                 allcat.docs.map(eachindi => {
                     if(eachindi.data().citystate == "active") {
                     var x = { id : eachindi.id , ... eachindi.data()};
-                    console.log(x);
                     alltemps.push(x);
                     }
                     
@@ -110,7 +105,6 @@ const index = (props) => {
             });
             
         }).catch(e => {
-            console.log(e);
             setloadingscreen(false);
         })
     }, [])
@@ -119,8 +113,6 @@ const index = (props) => {
         const userid = partnerauthid;
         if(anythingchanged == false) {
             navigation.navigate(PINCODESPICKER , {partnerid : partnerauthid});
-
-            console.log("No need to upload");
         }
        else if(selectedcities.length > 3) {
            setmessage("You can not pick more than 3 Cities");

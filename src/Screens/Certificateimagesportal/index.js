@@ -63,20 +63,14 @@ const index = (props) => {
                     onPress: () => {
                         const userid = partnerauthid;
                         setloadingscreen(true);
-                        console.log(userid);
                         db.collection('partners').doc(userid).collection('certificateimages').doc('certificateimages').get().then(ss => {
                             var exist = ss.data().images;
-                            console.log("Exist");
-                            console.log(exist);
-
                             var copy = [];
                             for (each in exist) {
                                 if(exist[each].imageurl != item.imageurl) {
                                     copy.push(exist[each]);
                                 }
                             }
-                            console.log("Copy");
-                            console.log(copy);
                             db.collection('partners').doc(userid).collection('certificateimages').doc('certificateimages').set({
                                 images : copy
                             }).then(doned => {
@@ -86,7 +80,6 @@ const index = (props) => {
                             
                         }).catch(ee => {
                             setloadingscreen(false);
-                            console.log(err);
                         })
                     }
                   }
@@ -226,7 +219,6 @@ const index = (props) => {
         const result = await ImagePicker.launchCameraAsync();
     
         // Explore the result
-        console.log(result);
     
         if (!result.cancelled) {
             uploadprofileimage(result.uri);
@@ -256,12 +248,8 @@ const index = (props) => {
         setloadingscreen(true);
         var exisitngarray = [];
         task.put(blob).then(() => {
-            console.log('Image uploaded to the bucket! ');
-            console.log(userid);
             task.getDownloadURL().then((url) => { console.log(url)
                 db.collection('partners').doc(userid).collection('certificateimages').doc("certificateimages").get().then(olddata => {
-                    console.log("Check this");
-                    console.log(olddata.data());
                     if(olddata.data() != undefined) {
                         if(olddata.data().images != undefined) {
                             exisitngarray = olddata.data().images;
@@ -282,7 +270,6 @@ const index = (props) => {
                         // fetchallimages();
                     })
                     .catch(erererrr => {
-                        console.log(erererrr);
                         setloadingscreen(false);
                     })
                 }).catch(olderror => {
@@ -294,7 +281,6 @@ const index = (props) => {
             })
             setmessage('Image uploaded successfully ' );
         }).catch((e) => {
-            console.log('uploading image error => ', e);
             setmessage('Something went wrong');
             setloadingscreen(false);
         });
@@ -340,7 +326,6 @@ const index = (props) => {
         }).catch(ee => {
             setloadingscreen(false);
             setdisplaynewalbumdialog(false);
-            console.log(err);
         })
         
      }}

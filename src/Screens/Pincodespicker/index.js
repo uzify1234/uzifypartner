@@ -63,7 +63,6 @@ const index = (props) => {
     const scrollToIndex = () => {
       
         if(scrollRef.current) {
-            console.log('scroll to index called !')
             let index = 0
             scrollRef.current?.scrollTo({
                 y: 0,
@@ -76,9 +75,6 @@ const index = (props) => {
         return item.id
       }
       const onlycitiesrender = ({item}) => { 
-
-        console.log("Current tapped city");
-        console.log(currentlytappedcity);
         var findout = "";
         if(currentlytappedcity != null) {
             findout = currentlytappedcity.cityname;
@@ -136,8 +132,6 @@ const index = (props) => {
 
 
     const setSelection = (city,pincode) => {
-        console.log(city+ " and "+pincode);
-        // console.log(selectedpincodes);
         var copy = selectedpincodes;
         var gf = selectedpincodes.filter(eg => eg.id == city );
         if(gf.length == 0) {
@@ -156,7 +150,6 @@ const index = (props) => {
           }
           copy.push(y);
           setselectedpincodes(copy);
-          console.log("City itself not found");
           setactualrefresh(true);
 
 
@@ -170,10 +163,8 @@ const index = (props) => {
             var wholecopy = selectedpincodes;
 
               var copy = selectedpincodes.filter(eg => eg.id == city );
-            //   console.log("Here");
               var collect = [];
               var innercopy = selectedpincodes.filter(eg => eg.id == city )[0].subCategory;
-            //   console.log("Or Here");
               innercopy.map(einf => {
                   if(einf.id !== pincode) {
                       collect.push(einf);
@@ -186,7 +177,6 @@ const index = (props) => {
             })
               copy[0].subCategory = collect;
               setselectedpincodes(wholecopy);
-              console.log("City and pincode both  found");
               setactualrefresh(true);
 
 
@@ -208,14 +198,12 @@ const index = (props) => {
               })
               copy[0].subCategory = innercopy;
               setselectedpincodes(wholecopy);
-              console.log("City found but pincode not found");
               setactualrefresh(true);
              
           }
 
         }
 
-        console.log(selectedpincodes);
 
 
     }
@@ -247,11 +235,9 @@ const index = (props) => {
             if(allinfo.data().selectedpincodes !== undefined) {
 
                 Object.entries(allinfo.data().selectedpincodes).map(([key, value]) => {
-                    // console.log("Hey Passing "+key+" and "+value);
                     setSelection(value,key);
                 })
                 // Object.entries(allinfo.data().selectedpincodes).map((key,value) => {
-                //     console.log("Passing "+key+" and "+allinfo.data().selectedpincodes[key]);
                 //     setSelection(key,value);
                 //  })
                 
@@ -263,12 +249,10 @@ const index = (props) => {
                         db.collection('cities').doc(eachcity).collection('pincodes').get().then(allpincodes => {
                             var singlecity = [];
                             allpincodes.docs.map(eahcdoc => {
-                                // console.log(eahcdoc.data());
                                 if(eahcdoc.data().isactive == true || eahcdoc.data().isactive == "true") {
                                     var found = false;
                                     if(allinfo.data().selectedpincodes !== undefined) {
                                     Object.keys(allinfo.data().selectedpincodes).map((key) => {
-                                        // console.log("Key is "+key);
                                         if(key == eahcdoc.data().id) {
                                             found = true;
                                         }
@@ -285,46 +269,37 @@ const index = (props) => {
                             resolve(y);
                             
                             // allcities.push(y);
-                            // console.log("All Cities ------------------------>");
-                            // console.log(allcities);
                             // setlistcontent([...allcities]);
                             
                             setactualrefresh(true);
                         }).catch(egh => {
-                            console.log(egh);
                             reject(egh);
                         })
                     })
                     .catch(gerr => {
-                        console.log(gerr);
                     })
                 }) 
                 allproms.push(newp);
                 
                 Promise.all(allproms).then(results => {
-                    console.log("Check this final");
                     
                     wholedatainsetails.push(results[0]);
                     setwholedatatotal(wholedatainsetails);
                     setlistcontent(wholedatainsetails);
                     setcurrentlytappedcity(wholedatainsetails[0]);
-                    console.log(wholedatainsetails[0]);
                    
                     
                     results.map(eachres => {
                         var x = {title : eachres.cityname , key : eachres.categoryName};
-                        console.log(x);
                         wholedata.push(x);
                     })
                     settabdata(wholedata);
-                    // console.log(wholedata);
                 })
 
                 
             })
   
         }).catch(err => {
-            console.log(err);
         })
 
   
@@ -332,13 +307,11 @@ const index = (props) => {
     }, [])
 
     const attempuploads = () => {
-        // console.log(selectedpincodes);
         const userid = partnerauthid;
         var citieschecked = 0;
         var usefularray = {};
         var actuallyarray = [];
         partnerselectedcities.map(eachcity => {
-            // console.log(eachcity);
             var dm = selectedpincodes.filter(cc => cc.id == eachcity).length;
             if(dm > 0) {
                 var coll = selectedpincodes.filter(cc => cc.id == eachcity)[0];
@@ -355,8 +328,6 @@ const index = (props) => {
                         actuallyarray.push(eachcoll.id);
                     })
                     if(citieschecked == partnerselectedcities.length){
-                        // console.log("Lets check this point");
-                        // console.log(usefularray);
                         db.collection('partners').doc(userid).update({
                             selectedpincodes : usefularray,
                             selectedpincodesarray : actuallyarray
@@ -382,15 +353,12 @@ const index = (props) => {
     }
 
     const handleConfirm = (pItems) => {
-        console.log('pItems =>', pItems);
       }
 
     const handleItemClick = ({index}) => {
-        console.log(index);
       };
     
       const handleInnerItemClick = ({innerIndex, item, itemIndex}) =>  {
-        console.log(innerIndex);
       };
 
 
@@ -428,9 +396,7 @@ const index = (props) => {
       }
  
       const renderTab = (item, index) => {
-          console.log("render");
           var fm = listcontent.filter(ek => ek.categoryName == item.key);
-        //   console.log(fm);
         return <View>
                       {
                                     fm.length > 0 && fm[0].subCategory.map(eachsc => {

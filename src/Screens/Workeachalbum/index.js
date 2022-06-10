@@ -28,9 +28,7 @@ const index = (props) => {
 
 
     useEffect(() => {
-        console.log("Each item is ");
         setpartnerauthid(props.route.params.partnerid);
-        console.log(props.route.params.partnerid);
         setcurrentalbum(props.route.params.item);
         fetchallimages();
         // setallimages(props.route.params.item.images)
@@ -44,9 +42,7 @@ const index = (props) => {
           aspect: [3, 3],
           quality: 1,
         });
-    
-        console.log(result);
-        console.log(partnerauthid);
+
     
         if (!result.cancelled) {
             setprofileimage(result.uri);
@@ -77,11 +73,8 @@ const index = (props) => {
             setloadingscreen(true);
             var exisitngarray = [];
             task.put(blob).then(() => {
-                console.log('Image uploaded to the bucket! ');
                 task.getDownloadURL().then((url) => { console.log(url)
                     db.collection('partners').doc(userid).collection('workimages').doc(currentalbum.id).get().then(olddata => {
-                        console.log("Check this");
-                        console.log(olddata.data());
                         exisitngarray = olddata.data().images;
                         exisitngarray.push({imageurl : url,storagelocation : currentTimeInSeconds});
                         var ccc = allimages;
@@ -97,7 +90,6 @@ const index = (props) => {
                             fetchallimages();
                         })
                         .catch(erererrr => {
-                            console.log(erererrr);
                             setloadingscreen(false);
                         })
                     }).catch(olderror => {
@@ -109,7 +101,6 @@ const index = (props) => {
                 })
                 setmessage('Image uploaded successfully ' );
             }).catch((e) => {
-                console.log('uploading image error => ', e);
                 setmessage('Something went wrong');
                 setloadingscreen(false);
             });
@@ -119,10 +110,6 @@ const index = (props) => {
 
 
     const deleteimage= (item) => {
-        console.log("copy is ");
-                    
-
-        console.log(currentalbum);
         Alert.alert(
             "Delete Image ?",
             "Are you sure you want to delete this image ",
@@ -139,16 +126,11 @@ const index = (props) => {
                     setloadingscreen(true);
                     var copy = [];
                     currentalbum.images.map(eachim => {
-                        console.log("Comparing "+eachim+" andddddd "+item);
                         if(eachim !== item) {
                             copy.push(eachim);
                         }
                     })
-                    console.log("copy is ");
-                    
-
-                    console.log(currentalbum);
-                    
+                                        
                     db.collection('partners').doc(userid).collection('workimages').doc(currentalbum.id).update({
                         images: currentalbum.images.filter(im => im.imageurl !== item.imageurl)
                       }).then(ss => {
@@ -157,14 +139,12 @@ const index = (props) => {
 
                         // var desertRef = firebase.storage().child('partners/'+userid+'/workimages/');
                         // desertRef.delete().then(function() {
-                        // console.log("DELETEDDDDDDD");
                         // }).catch(function(error) {
                         // // Uh-oh, an error occurred!
                         // });
 
                     }).catch(ee => {
                         setloadingscreen(false);
-                        console.log(err);
                     })
                 }
               }
@@ -188,21 +168,14 @@ const index = (props) => {
     const fetchallimages = () => {
         const userid = props.route.params.partnerid;
         setloadingscreen(true);
-        console.log("Check it");
-        console.log(props.route.params.partnerid);
-        console.log(props.route.params.item.id);
         db.collection('partners').doc(props.route.params.partnerid).collection('workimages').doc(props.route.params.item.id).get().then(sd => {
-            console.log("reaching here");
             
             var ff = {id :sd.id, albumname : sd.data().albumname , images : sd.data().images}
             setcurrentalbum(ff);
-            console.log(ff);
             // var tmp = [];
             // sd.docs.map(each => {
             //     tmp.push();
             // })
-            // console.log("Setting itt ");
-            // console.log(tmp);
             setallimages(sd.data().images);
             setrefresh(!refresh);
             setloadingscreen(false);

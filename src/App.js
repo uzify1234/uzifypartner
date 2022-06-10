@@ -10,6 +10,7 @@ import * as TaskManager from 'expo-task-manager';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import { CREDITSSCREEN, PARTICULARBOOKING, RECHARGESCREEN, UPCOMINGBOOKINGS } from './Constants/routesName';
+import 'react-native-gesture-handler';
 
 
 Notifications.setNotificationHandler({
@@ -54,11 +55,10 @@ const navigationRef = useRef();
 
   useEffect(() => {
   
-    getFonts();
+  getFonts();
     const BACKGROUND_NOTIFICATION_TASK = 'BACKGROUND-NOTIFICATION-TASK';
 
 TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, ({ data, error, executionInfo }) => {
-  console.log('Received a notification in the background!');
   alert("Recived Notification");
   // Do something with the notification data
 });

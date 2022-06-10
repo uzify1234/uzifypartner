@@ -46,6 +46,7 @@ const index = () => {
       const attemptInvisibleVerification = false;
       const [isInit, setisInit] = useState(false)
 
+
     const {width,height} = Dimensions.get('screen');
     
     const [number, onChangeNumber] = React.useState(null);
@@ -235,12 +236,12 @@ const modifyasyncstorage = (user) => {
     return (
         <KeyboardAwareScrollView style={{backgroundColor : BACKGROUNDCOLOR }} keyboardShouldPersistTaps={'handled'}>
            {loadingscreen == true && <Loader visible={loadingscreen}/>} 
-           {isInit &&  <FirebaseRecaptchaVerifierModal
+          <FirebaseRecaptchaVerifierModal
         ref={recaptchaVerifier}
         firebaseConfig={firebaseConfig}
-        attemptInvisibleVerification={attemptInvisibleVerification}
         androidHardwareAccelerationDisabled
-        />}
+        attemptInvisibleVerification={attemptInvisibleVerification}
+        />
             <View style={{backgroundColor : BACKGROUNDCOLOR , height : height }}>
     
                 <View style={{position : 'relative' }}>
@@ -428,7 +429,6 @@ const modifyasyncstorage = (user) => {
 
             </View>
         </KeyboardAwareScrollView>
-
     )
 }
 

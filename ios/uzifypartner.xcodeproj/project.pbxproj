@@ -13,6 +13,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		141F3ADB2DC24FAB84F54CA0 /* GothamBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81338170D46D4859B21C1A6B /* GothamBoldItalic.ttf */; };
+		173FC163B46E44DC87EF6FCC /* client.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1FC507D38C664A259C9451D3 /* client.mp3 */; };
 		2EB6D90ED3B5415C976DA884 /* GothamMedium_1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EED047F6FEFA46A69763C87F /* GothamMedium_1.ttf */; };
 		3614EC4D212B4086BD0ABC38 /* GothamMediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D43CBF53AA4641368B0F365F /* GothamMediumItalic.ttf */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
@@ -20,11 +21,12 @@
 		68D73575EA664393940AF665 /* Gotham-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = A6F689954F0A4D97BFE6441F /* Gotham-Black.otf */; };
 		694E6105A8B74B3EAEC8C5E4 /* GothamMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2B54EC87C2346899D983164 /* GothamMedium.ttf */; };
 		6B3ECA4A8F3F4B3681BE8D89 /* Gotham-UltraItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D39BADA1350F4FF1BB955265 /* Gotham-UltraItalic.otf */; };
+		70FFCFFC9176CAAD0C52EAD1 /* Pods_uzifypartner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10ACB7A68B0BEEF80A97206 /* Pods_uzifypartner.framework */; };
 		7D92BA75423942FDB5456DFD /* Gotham-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0852E853B1AC486DAB0E83AF /* Gotham-Thin.otf */; };
 		81A3D431F0C64FC1AAECB601 /* GothamLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B237B13ABD04F508EE08A15 /* GothamLight.ttf */; };
+		82FBB27FF4374709BBDDD27F /* partner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2C7DE5097C04D2DA4318B43 /* partner.mp3 */; };
 		8525C2E2B70749B9945DE2B5 /* Gotham-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE7752ACC8ED435DAF8F2A7E /* Gotham-ThinItalic.otf */; };
 		90AA4DA9251E485E9E6E029D /* GothamBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B5519DB67D048AFB6893435 /* GothamBold.ttf */; };
-		96905EF65AED1B983A6B3ABC /* libPods-uzifypartner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-uzifypartner.a */; };
 		9E71A39DE27D45039780038A /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADE6F8473814293819B05DA /* noop-file.swift */; };
 		B331DFAC47D14424923DCD3B /* Gotham-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E76225C3C66D4673AAEA305E /* Gotham-BookItalic.otf */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
@@ -33,8 +35,6 @@
 		F0311EB0FFFB4DA999142DD9 /* GothamLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4716A962231D4B3BB94ECAE3 /* GothamLightItalic.ttf */; };
 		F2D04AF4AC4C4161BBFEDB17 /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8A8CD5E439774F65BA7B09A5 /* Gotham-Bold.otf */; };
 		F5588D8EA6B84C2AA63D42C7 /* GothamBookItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E78ABE517B640B799C48759 /* GothamBookItalic.ttf */; };
-		82FBB27FF4374709BBDDD27F /* partner.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2C7DE5097C04D2DA4318B43 /* partner.mp3 */; };
-		173FC163B46E44DC87EF6FCC /* client.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1FC507D38C664A259C9451D3 /* client.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,11 +48,11 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = uzifypartner/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = uzifypartner/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = uzifypartner/main.m; sourceTree = "<group>"; };
+		1FC507D38C664A259C9451D3 /* client.mp3 */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = client.mp3; path = uzifypartner/client.mp3; sourceTree = "<group>"; };
 		2B5519DB67D048AFB6893435 /* GothamBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = GothamBold.ttf; path = ../assets/fonts/GothamBold.ttf; sourceTree = "<group>"; };
 		4716A962231D4B3BB94ECAE3 /* GothamLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = GothamLightItalic.ttf; path = ../assets/fonts/GothamLightItalic.ttf; sourceTree = "<group>"; };
 		4F0FAAC9E4F34B968CC9FB4E /* Gotham-XLightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Gotham-XLightItalic.otf"; path = "../assets/fonts/Gotham-XLightItalic.otf"; sourceTree = "<group>"; };
 		50C069B28D0E49429AE50F8A /* Gotham-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Gotham-Light.otf"; path = "../assets/fonts/Gotham-Light.otf"; sourceTree = "<group>"; };
-		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-uzifypartner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-uzifypartner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ADE6F8473814293819B05DA /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "uzifypartner/noop-file.swift"; sourceTree = "<group>"; };
 		6C2E3173556A471DD304B334 /* Pods-uzifypartner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uzifypartner.debug.xcconfig"; path = "Target Support Files/Pods-uzifypartner/Pods-uzifypartner.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-uzifypartner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uzifypartner.release.xcconfig"; path = "Target Support Files/Pods-uzifypartner/Pods-uzifypartner.release.xcconfig"; sourceTree = "<group>"; };
@@ -60,6 +60,7 @@
 		8A8CD5E439774F65BA7B09A5 /* Gotham-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Gotham-Bold.otf"; path = "../assets/fonts/Gotham-Bold.otf"; sourceTree = "<group>"; };
 		8B237B13ABD04F508EE08A15 /* GothamLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = GothamLight.ttf; path = ../assets/fonts/GothamLight.ttf; sourceTree = "<group>"; };
 		8E78ABE517B640B799C48759 /* GothamBookItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = GothamBookItalic.ttf; path = ../assets/fonts/GothamBookItalic.ttf; sourceTree = "<group>"; };
+		A2C7DE5097C04D2DA4318B43 /* partner.mp3 */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = partner.mp3; path = uzifypartner/partner.mp3; sourceTree = "<group>"; };
 		A6F689954F0A4D97BFE6441F /* Gotham-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Gotham-Black.otf"; path = "../assets/fonts/Gotham-Black.otf"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = uzifypartner/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
@@ -72,9 +73,8 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		EED047F6FEFA46A69763C87F /* GothamMedium_1.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = GothamMedium_1.ttf; path = ../assets/fonts/GothamMedium_1.ttf; sourceTree = "<group>"; };
+		F10ACB7A68B0BEEF80A97206 /* Pods_uzifypartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_uzifypartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3886E0B368940FFBADDA926 /* uzifypartner-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "uzifypartner-Bridging-Header.h"; path = "uzifypartner/uzifypartner-Bridging-Header.h"; sourceTree = "<group>"; };
-		A2C7DE5097C04D2DA4318B43 /* partner.mp3 */ = {isa = PBXFileReference; name = "partner.mp3"; path = "uzifypartner/partner.mp3"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1FC507D38C664A259C9451D3 /* client.mp3 */ = {isa = PBXFileReference; name = "client.mp3"; path = "uzifypartner/client.mp3"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96905EF65AED1B983A6B3ABC /* libPods-uzifypartner.a in Frameworks */,
+				70FFCFFC9176CAAD0C52EAD1 /* Pods_uzifypartner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +114,7 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				58EEBF8E8E6FB1BC6CAF49B5 /* libPods-uzifypartner.a */,
+				F10ACB7A68B0BEEF80A97206 /* Pods_uzifypartner.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -207,7 +207,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				57866E7ABF9BCFEDE0199884 /* [CP] Embed Pods Frameworks */,
+				1E68E8EC801DA056C5D16D4E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -321,19 +321,86 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		57866E7ABF9BCFEDE0199884 /* [CP] Embed Pods Frameworks */ = {
+		1E68E8EC801DA056C5D16D4E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-uzifypartner/Pods-uzifypartner-frameworks.sh",
-				
+				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/RCT-Folly/folly.framework",
+				"${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework",
+				"${BUILT_PRODUCTS_DIR}/RNCAsyncStorage/RNCAsyncStorage.framework",
+				"${BUILT_PRODUCTS_DIR}/RNDateTimePicker/RNDateTimePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/RNGestureHandler/RNGestureHandler.framework",
+				"${BUILT_PRODUCTS_DIR}/React-Codegen/React_Codegen.framework",
+				"${BUILT_PRODUCTS_DIR}/React-Core/React.framework",
+				"${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTAnimation/RCTAnimation.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTBlob/RCTBlob.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTImage/RCTImage.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTLinking/RCTLinking.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTNetwork/RCTNetwork.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTSettings/RCTSettings.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTText/RCTText.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework",
+				"${BUILT_PRODUCTS_DIR}/React-cxxreact/cxxreact.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsinspector/jsinspector.framework",
+				"${BUILT_PRODUCTS_DIR}/React-logger/logger.framework",
+				"${BUILT_PRODUCTS_DIR}/React-perflogger/reactperflogger.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactCommon/ReactCommon.framework",
+				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
+				"${BUILT_PRODUCTS_DIR}/fmt/fmt.framework",
+				"${BUILT_PRODUCTS_DIR}/glog/glog.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-webview/react_native_webview.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PlugNPlay.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/folly.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTTypeSafety.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCAsyncStorage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNDateTimePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNGestureHandler.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React_Codegen.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreModules.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTAnimation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTBlob.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTLinking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTNetwork.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTSettings.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTText.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTVibration.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/cxxreact.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsi.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsireact.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsinspector.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/logger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/reactperflogger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactCommon.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fmt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_webview.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -347,11 +414,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-uzifypartner/Pods-uzifypartner-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXConstants.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

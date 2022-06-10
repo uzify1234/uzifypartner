@@ -64,8 +64,6 @@ const index = (props) => {
         }
         const secondsToHms = (d,e) => {
           d = Number(d) - Number(e);
-          console.log("Difference");
-          console.log(d);
           var h = Math.floor(d / 3600);
           var m = Math.floor(d % 3600 / 60);
           var s = Math.floor(d % 3600 % 60);
@@ -91,10 +89,8 @@ const index = (props) => {
             sstl = sstl + 12;
         }
         var generatingstring = selecteddate+' '+sstl+':00:00';
-        console.log(generatingstring);
         var date = new Date(...getParsedDate(generatingstring));
         var modifieddate = date + (5.5 * 60 * 60);
-        console.log(modifieddate);
         return (Math.round((date).getTime() / 1000));
         
       }
@@ -137,7 +133,6 @@ const index = (props) => {
      
     }
     const acceptbookingtapped = (item) => {
-        console.log(allqueueorders);
         var today = Math.round((new Date()).getTime() / 1000);
         var totaltime = 0;
        
@@ -146,7 +141,6 @@ const index = (props) => {
        
         
         item.data.cart.map(eachcart => {
-            console.log("Considering "+Number(eachcart.servicetime))
             totaltime = totaltime + Number(eachcart.servicetime);
         })
         if(item.freeitem != null ) {
@@ -156,8 +150,6 @@ const index = (props) => {
             totaltime = 120;
         }
         var endddts = ddts + (totaltime * 60);
-        console.log(item);
-        console.log("Total service time is "+totaltime+ " and credits required is "+Number(item.mincredits));
         if(Number(item.mincredits) > currentusercredits) {
             Alert.alert(
                 "Insufficient Credits",
@@ -173,7 +165,6 @@ const index = (props) => {
               );
         }
         else if(Number(today) >= Number(item.startshowtime) && Number(today) <= Number(item.endshowtime)) {
-            console.log("booking accepted");
             db.collection('orders').doc(item.id).update({
                 assignedpartner : currentuser.uid,
                 haspartnerapproved : true
@@ -205,7 +196,7 @@ const index = (props) => {
                                         [
                                           {
                                             text: "Ok",
-                                            onPress: () => console.log("Cancel Pressed"),
+                                            onPress: () => navigation.pop(),
                                             style: "cancel"
                                           }
                                          
@@ -233,7 +224,6 @@ const index = (props) => {
             })
         }
         else {
-            console.log("Cant accept booking");
             Alert.alert(
                 "Booking can not be Accepted",
                 "",
@@ -308,21 +298,15 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
             db.collection('orders').doc(props.route.params.bookingid).get().then(fgh => {
                 // if(fgh.data().status != "completed") {
                 var x = {id : fgh.id , data : fgh.data()};
-                console.log("Start booking date");
-                console.log(formatDate(new Date(fgh.data().selecteddate)));
                 var copy = allupcomingbookings;
                 copy.push(x);
                 setallupcomingbookings(copy);
                 setrefreshdata(!refreshdata);
                 setloadingscreen(false);
 
-                // console.log("Got upcoming latest one");
-                // console.log(x.id);
-
                 // }
                 
             }).catch(erf => {
-                console.log(erf);
                 setloadingscreen(false);
             })
 
@@ -331,33 +315,18 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 
         const getmeorders = (user) => {
             var today = Math.round((new Date()).getTime() / 1000);
-            console.log(today);
             setloadingscreen(true);
-            console.log("start from here "+user.uid);
             db.collection('partners').doc(user.uid).collection('bookingsonqueue').onSnapshot((allqueues) => {
-                console.log("GET ME ORDERS Latest");
                 var tmporders = [];
                 var allproms = [];
 
                 // setallqueueorders([]);
                 allqueues.forEach((doc) => {
-                    console.log("Check it");
-                    console.log(doc.id);
                     var xyz = new Promise((resolve, reject) => { 
                     db.collection('orders').doc(doc.id).get().then(fgh => {
-                        var x = {id : fgh.id , data : fgh.data(),startshowtime : Number(doc.data().startshowtime) , endshowtime : Number(doc.data().endshowtime),mincredits : Number(doc.data().mincredits),eligibletodisplay : false};
-                        console.log("Has partner approved "+doc.id);
-                        console.log(fgh.data().haspartnerapproved);
-                        
-                        if(fgh.data().haspartnerapproved == undefined) {
-                            console.log("Has partner approved "+doc.id);
-                            console.log(fgh.data().haspartnerapproved);
-                        }
-                        else if(fgh.data().haspartnerapproved == false || fgh.data().haspartnerapproved == 'false') {
-                            console.log("Or Is it printing from here");
-
+                        var x = {id : fgh.id , data : fgh.data(),startshowtime : Number(doc.data().startshowtime) , endshowtime : Number(doc.data().endshowtime),mincredits : Number(doc.data().mincredits),eligibletodisplay : false};                        
+                         if(fgh.data().haspartnerapproved == false || fgh.data().haspartnerapproved == 'false') {
                         var fggh = allqueueorders.filter(llo => llo.id == fgh.id);
-                        console.log("Lets check");
                         if(Number(today) >= Number(doc.data().startshowtime) && Number(today) <= Number(doc.data().endshowtime)) {
                             x.eligibletodisplay = true;
                             // var copy = allqueueorders;
@@ -368,13 +337,11 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
                         }
                         else {
                             x.eligibletodisplay = false;
-                            console.log("Does not fullfill");
                         }
                         }
                         resolve(x);
                         tmporders.push(x);
                     }).catch(erf => {
-                        console.log(erf);
                         reject(erf);
                     })
 
@@ -382,20 +349,13 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
                 allproms.push(xyz);
 
                 });
-                Promise.all(allproms).then(allres => {
-                    console.log("Promise Queues Lets check it here ");
-                    console.log(allres[0].data.placedon);
-  
+                Promise.all(allproms).then(allres => { 
                     allres = allres.sort((a, b) => (Number(a.data.placedon) > Number(b.data.placedon)) ? -1 : 1);
                     allres = allres.filter(eres => eres.eligibletodisplay == true);
-                    allres.map(each => {
-                        console.log(each.id);
-                    })
                     setallqueueorders(allres);
                     setloadingscreen(false);
                 }).catch(promerr => {
-                    console.log("Is it printing from here");
-                    console.log(promerr);
+
                 })
                 setloadingscreen(false);
                 
@@ -418,7 +378,6 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
                     // getmeorders(user);
 
                 }).catch(err => {
-                  console.log(err);
                 });
   
                      
@@ -433,7 +392,6 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 
 
          const renderTab = (item, index) => {
-            console.log("render");
           return <View>
                        
           </View>

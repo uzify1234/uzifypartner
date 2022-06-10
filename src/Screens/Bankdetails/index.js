@@ -61,11 +61,9 @@ const index = (props) => {
         setpartnerauthid(props.route.params.partnerid);
         const userid = props.route.params.partnerid;
         db.collection('partners').doc(userid).get().then(info => {
-            console.log(info.data());
             setalreadyexistingdata(info.data());
             onChangeAccnum(info.data().accountnumber);
             onChangeConfirmaccnum(info.data().accountnumber);
-            onChangeConfirmaccnum("");
             onChangeIfsc(info.data().ifsc);
             onChangeAccountholdername(info.data().accountholdername);
             onChangeBankname(info.data().bankname);
@@ -74,7 +72,6 @@ const index = (props) => {
      
        
         }).catch(e => {
-            console.log("ERR")
         })
     }, [])
 
@@ -123,8 +120,6 @@ const index = (props) => {
    
 
     const lastupload = () => {
-        console.log("GST ");
-        console.log(gstnum);
         const userid = partnerauthid;
         setloadingscreen(true);
         db.collection('partners').doc(userid).update({
@@ -139,7 +134,6 @@ const index = (props) => {
             setloadingscreen(false);
             navigation.navigate(CERTIFICATEIMAGESPORTAL , {partnerid : partnerauthid});
         }).catch(ee => {
-            console.log(ee);
             setloadingscreen(false);
         })
     }

@@ -1,6 +1,6 @@
 import React,{useState , useEffect} from 'react'
 import { View, Text, Image,TouchableOpacity, SafeAreaView } from 'react-native'
-import { DEEPPINK, topgapforheading } from '../../Constants/Colors.js';
+import { DEEPPINK, LIGHTPINK, topgapforheading } from '../../Constants/Colors.js';
 import styles from './style.js';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -30,7 +30,7 @@ const index = (props) => {
                 <Image source={require('../../assets/images/orderplaced.png')} style = {{width : '90%' , height : 300 , resizeMode : 'contain'}} />
                 <Image source={require('../../assets/images/congratulations.png')} style = {{width : '90%' , height : 60 , resizeMode : 'cover'}} />
 
-                <Customtext type='light' style={{fontWeight : '700',textAlign : 'center' , fontSize : 20 , color : DEEPPINK,marginTop : 20,padding : 15}}>Your Profile is submitted. Wait for the verification before you start accepting leads.</Customtext>
+                <Customtext type='light' style={{fontWeight : '700',textAlign : 'center' , fontSize : 20 , color : DEEPPINK,marginTop : 20,padding : 15, backgroundColor : LIGHTPINK,borderRadius : 10,marginBottom : 48}}>Your Profile is submitted. Wait for the verification before you start accepting leads.</Customtext>
             </View>
             <TouchableOpacity onPress={() => {navigation.navigate(LOGIN)}} style={{backgroundColor : DEEPPINK,padding : 15,width : '60%',marginLeft : '20%',borderRadius  :5}}><Text style={{color : 'white',textAlign : 'center',fontWeight : '700'}}>Back to Login</Text></TouchableOpacity>
         </SafeAreaView>

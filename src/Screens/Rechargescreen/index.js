@@ -52,30 +52,17 @@ const index = (props) => {
 
 
     const getMagicResponse = (resp) => {
-        console.log("From RECHARGE SCREEN");
-        
-
-            console.log(resp);
 var obj = {};
 var newres = resp.slice(0, -2); 
 var newres2 = newres.substring(2);
-console.log("New String");
-console.log(newres2);
 var part1 = newres2.split(",");
-console.log(part1);
 part1.map((each => {
-    console.log(each);
     var part2 = each.split(":");
-    console.log(part2[0].trim()+" and "+part2[1].trim());
     obj[part2[0].trim()] = part2[1].trim();
 }))
    
 obj['userid'] = currentuser.uid;
 obj['transactiondone'] = Math.round((new Date()).getTime() / 1000);
-
-console.log(obj);
-
-  
 
             if(obj.status == "success") {
                 var newobj = {data : obj,paymenttype : 'partnercreditrecharge'};
@@ -84,7 +71,6 @@ console.log(obj);
                         credits : (currentcredits + Number(amount))
                     }).then(ddcred => {
                         var randomorderid = obj.txnid;
-                        console.log("Wil set to "+currentuser.uid);
                         db.collection('partners').doc(currentuser.uid).collection('creditshistory').doc(randomorderid).set({
                             credits : Number(amount),
                             description : 'Recharge done by you',
@@ -95,7 +81,6 @@ console.log(obj);
                         }).then(histdone => {
                             setloadingscreen(false);
                             props.route.params.setfetchagain(!props.route.params.fetchagain);
-                            console.log("Reached here");
                             db.collection('partnerrechargetransactions').doc(randomorderid).set(obj).then(dataset => {
                                 Alert.alert(
                                     "Recharge Done",
@@ -110,17 +95,14 @@ console.log(obj);
                                     ]
                                   );
                             }).catch(egg => {
-                                console.log(egg);
                             })
 
                         }).catch(histerr => {
-                            console.log(histerr);
                             setloadingscreen(false);
                         })
 
 
                     }).catch(ecred => {
-                        console.log(ecred);
                         setloadingscreen(false);
                     })
             }
@@ -134,13 +116,10 @@ console.log(obj);
 
     const testpayment = () => {
 
-        console.log(wholeandsolepartnerdata);
 
         var realname = wholeandsolepartnerdata.mobilenumber.split(" ");
-        console.log(realname);
 
         var realmob = wholeandsolepartnerdata.mobilenumber.split("+91");
-        console.log(realmob);
         setonlinobject({
             amount : parseFloat(parseFloat(amount) * currentconversion),
             productinfo : 'Partner Credits Recharge',
@@ -169,10 +148,8 @@ console.log(obj);
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
                   setcurrentuser(user);
-                  console.log(user.uid);
                   setloadingscreen(true);
                   db.collection('partners').doc(user.uid).get().then((df) => {
-                      console.log(user.uid);
                     setcurrentcredits(df.data().credits);
                     setwholeandsolepartnerdata(df.data());
                     var ncred = Number(df.data().credits);
@@ -180,10 +157,8 @@ console.log(obj);
 
 
                     var realname = df.data().name.split(" ");
-                    console.log(realname);
             
                     var realmob = df.data().mobilenumber.split("+91");
-                    console.log(realmob);
                     var randtxnid = db.collection('partnerrechargetransactions').doc().id;
                     setonlinobject({
                         amount : parseFloat(parseFloat(amount) * currentconversion),
@@ -202,12 +177,10 @@ console.log(obj);
 
 
                   }).catch(err => {
-                    console.log(err);
                   });
                 }
                 else {
                     setcurrentuser(null);
-                    console.log('user not logged in')
                 }
     
                 

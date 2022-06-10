@@ -23,12 +23,9 @@ const index = (props) => {
 
 
         setpartnerauthid(props.route.params.partnerid);
-        console.log("check");
-        console.log(props.route.params.partnerid);
         db.collection('partners').doc(props.route.params.partnerid).get().then(det => {
             if(det.data().error !== undefined) {
                 setciurrenterror(det.data().error);
-                console.log(det.data().error);
             }
             if(det.data().submissiondone == undefined) {
                 setmessage("Please Complete your profile");
@@ -56,10 +53,8 @@ const index = (props) => {
 
     const logoutandmove = () => {
         firebase.auth().signOut().then(() => {
-            console.log("User Logged Out");
             navigation.navigate(LOGIN);
         }).catch(e => {
-            console.log(e);
         });
     }
     return (
@@ -79,7 +74,7 @@ const index = (props) => {
                     }
                 
 
-                    <Customtext type='light' style={{fontWeight : '700',textAlign : 'center' , fontSize : 18,lineHeight : 30 , color : DEEPPINK,marginTop : 20,padding : 15}}>{message}</Customtext>
+                    <Customtext type='light' style={{fontWeight : '700',textAlign : 'center' , fontSize : 18,lineHeight : 30 , color : DEEPPINK,marginTop : 20,padding : 15, backgroundColor : LIGHTPINK, borderRadius : 10, marginBottom : 24}}>{message}</Customtext>
                 </View>
                 {ciurrenterror != "" && message != "Your profile is under verification, Please try after sometime"  && <TouchableOpacity onPress={proceedtorectify}  style = {{width : '80%',marginLeft : '10%',padding : 12 , backgroundColor : DEEPPINK , borderRadius : 5 , marginTop : 20,marginBottom : 30}}><Customtext type='light' style={{fontWeight : '800',color : 'white',textAlign : 'center',fontSize : 18}}>Proceed to Rectify Errors</Customtext></TouchableOpacity>}
                     {

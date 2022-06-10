@@ -51,7 +51,6 @@ const index = (props) => {
              setcurrentuser(user);
              db.collection('orders').doc(props.route.params.bookingid).get().then(wholebook => {
                 var x = {id : wholebook.id,data : wholebook.data()};
-                console.log(x);
                 setwholebooking(x);
                 setcurrentstatus(x.data.status);
                 setdatafetched(true);
@@ -74,7 +73,6 @@ const index = (props) => {
 
     const handlecancelreason = (e) => {
         setcancelreason(e.target.value);
-        console.log(e.target.value);
     }
 
 
@@ -84,7 +82,6 @@ const index = (props) => {
 
         const code = wholebooking.data.startcode;
         if(code == vt) {
-            console.log("Both matches "+code);
                   var today = Math.round((new Date()).getTime() / 1000);
         db.collection('orders').doc(bookingid).update({
             servicestarted : today,
@@ -108,7 +105,6 @@ const index = (props) => {
         })
         }
         else {
-            console.log("Both does not matches "+code);
             Alert.alert(
                 "Invalid Start Code",
                 "",
@@ -137,25 +133,17 @@ const index = (props) => {
                 status : 'completed'
             }).then(dc => {
                 setcurrentstatus('completed');
-                console.log("Hey");
                 db.collection('partners').doc(currentuser.uid).collection('pastbookings').doc(bookingid).set({
                     completed : true
                 }).then(dddone => {
-                    console.log("Hello");
                     db.collection('partners').doc(currentuser.uid).collection('upcomingbookings').doc(bookingid).delete().then(deldone => {
-                        console.log("Whats up ?");
-
-
-
                         var bookinguser = wholebooking.data.userid;
                         db.collection('users').doc(bookinguser).get().then(budata => {
                             var refcode = budata.data().referalcodeapplied;
                             var successfullycompletedbookings = budata.data().successfullycompletedbookings || 0;
-                            console.log("Ref code is "+refcode+" successfullycompltedbooking "+successfullycompletedbookings);
                             if((successfullycompletedbookings == 0  || successfullycompletedbookings == '0' ) && refcode != "") {
                               db.collection('referalcodes').doc(refcode).get().then(refdata => {
                                 var uuid = refdata.data().userid;
-                                console.log("Check B "+uuid);
                                 db.collection('users').doc(uuid).get().then(ruuser => {
                                   db.collection('users').doc(uuid).update({
                                     freeservicesavailable : Number(ruuser.data().freeservicesavailable || 0) + 1,
@@ -176,41 +164,68 @@ const index = (props) => {
                                         successfullycompletedbookings : Number(budata.data().successfullycompletedbookings || 0) + 1
                   
                                       }).then(upidone => {
-                                        setloadingscreen(false);
-                                        alert("Service Completed");
+                                        db.collection('partners').doc(currentuser.uid).get().then(partdetails => {
+                                          console.log("Partner Details");
+                                          console.log(partdetails.data());
+                                          db.collection('partners').doc(currentuser.uid).update({
+                                            servicesprovided : Number(partdetails.data().servicesprovided || 0) + 1
+                                            }).then(upidone => {
+                                            setloadingscreen(false);
+                                            alert("Service Completed");
+                                          }).catch(eridone => {
+                                          })
+                                        }).catch(err => {
+
+                                        })
                                       }).catch(eridone => {
-                                        console.log(eridone);
                                       })
                   
                                     }).catch(finalerr => {
                                         setloadingscreen(false);
-                                        console.log(finalerr);
                                     })
                   
                                 
                                 }).catch(catuser => {
                                     setloadingscreen(false);
-                                    console.log(catuser);
                                 })
                                 }).catch(ruerr => {
-                                  console.log(ruerr);
                                 })
                             }).catch(eeee => {
                                 setloadingscreen(false);
-                                console.log(eeee);
                             })
                             }
+                            else {
+                              var bookinguser = wholebooking.data.userid;
+                              db.collection('users').doc(bookinguser).get().then(budata => {
+                              db.collection('users').doc(bookinguser).update({
+                                successfullycompletedbookings : Number(budata.data().successfullycompletedbookings || 0) + 1
+                              }).then(upidone => {
+                                db.collection('partners').doc(currentuser.uid).get().then(partdetails => {
+                                  console.log("Partner Details");
+                                  console.log(partdetails.data());
+                                  db.collection('partners').doc(currentuser.uid).update({
+                                    servicesprovided : Number(partdetails.data().servicesprovided || 0) + 1
+                                    }).then(upidone => {
+                                    setloadingscreen(false);
+                                    alert("Service Completed");
+                                  }).catch(eridone => {
+                                  })
+                                }).catch(err => {
+
+                                })
+                              }).catch(eridone => {
+                              });
+                            }).catch(erlidone => {
+                            });
+                            }
                         }).catch(errbudat => {
-                          console.log(errbudat);
                         })
 
 
 
                     }).catch(eddf => {
-                        console.log(eddf);
                     })
                 }).catch(eedone => {
-                    console.log(eedone);
                 })
             }).catch(ee => {
 
@@ -230,9 +245,6 @@ const index = (props) => {
               {
                 text: "Yes Cancel Booking",
                 onPress: () => {
-                    console.log(wholebooking.id);
-                    console.log(currentuser.uid);
-                    console.log(cancelreason);
                     db.collection('cancellationbypartners').doc(wholebooking.id).set({
                         submittedby : currentuser.uid,
                         reason : cancelreason,
@@ -303,11 +315,11 @@ const index = (props) => {
             >
               <Text style={styles.textStyle}>Close</Text>
             </Pressable>
-            <Text style={[styles.modalText],{fontWeight : '600',textAlign : 'center',marginBottom : 30,marginTop : 30}}>Please give us reason for cancellation. Once you submit the reason, Admin will approve the cancellation or transfer booking to other partner.You might be penalise for this cancellation</Text>
+            <Text style={{...styles.modalText,fontWeight : '600',textAlign : 'center',marginBottom : 30,marginTop : 30}}>Please give us reason for cancellation. Once you submit the reason, Admin will approve the cancellation or transfer booking to other partner.You might be penalise for this cancellation</Text>
             <TextInput type='text' multiline={true} placeholder='State your reason here'                            onChangeText={(text) => setcancelreason(text)}
  style={{width : width/1.3,marginBottom : 30,fontSize : 16,fontWeight : '700',borderColor : DEEPPINK , borderWidth : 2,borderRadius : 5,padding : 10,height : 100}}/>
 
-            <TouchableOpacity onPress={finaltappedforcancellation} style={{width : 300,backgroundColor : DEEPPINK,padding : 12,borderRadius : 5,marginBottom : 20}}><Text style={{textAlign : 'center',color : 'white',fontWeight : '700',fontSize : 16}}>Submit</Text></TouchableOpacity>
+            <Pressable onPress={() => finaltappedforcancellation()} style={{width : width * 0.8,backgroundColor : DEEPPINK,padding : 18,borderRadius : 5,marginBottom : 20}}><Text style={{textAlign : 'center',color : 'white',fontWeight : '700',fontSize : 16}}>Submit</Text></Pressable>
    
           </View>
         </View>

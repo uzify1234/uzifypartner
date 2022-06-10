@@ -40,10 +40,8 @@ const index = (props) => {
 
 
     const cattapped = (item) => {
-        console.log(item);
         setanythingchanged(true);
          var fm = selectedcategories.filter(ef => ef.id == item.id);
-         console.log(fm.length);
          var copy = selectedcategories;
          if(fm.length == 0) {
             copy.push(item);
@@ -75,7 +73,6 @@ const index = (props) => {
         setpartnerauthid(props.route.params.partnerid);
         const userid = props.route.params.partnerid;
         setloadingscreen(true);
-        console.log(userid);
         db.collection('partners').doc(userid).get().then(info => {
             if(info.exists) {
             setalreadyexistingdata(info.data());
@@ -89,8 +86,6 @@ const index = (props) => {
                 allcat.docs.map(eachindi => {
                     if(eachindi.data().categorystate == "active") {
                     var x = { id : eachindi.id , ... eachindi.data()};
-                    console.log("yeahhhhh");
-                    console.log(x);
                     alltemps.push(x);
                     }
                     
@@ -107,8 +102,6 @@ const index = (props) => {
                 }
                 }
                 setselectedcategories(copyindetails);
-                console.log("Helloooooooooooo");
-                console.log(alltemps);
                 setallavailablecategories(alltemps);
                 setloadingscreen(false);
                 
@@ -117,7 +110,6 @@ const index = (props) => {
             });
             
         }).catch(e => {
-            console.log("ERR");
             setloadingscreen(false);
         })
     }, [])
@@ -126,7 +118,6 @@ const index = (props) => {
         const userid = partnerauthid;
         if(anythingchanged == false) {
             navigation.navigate(REGISTER , {partnerid : partnerauthid,userid : props.route.params.userid , number : props.route.params.number});
-            console.log("No need to upload");
         }
        else if(selectedcategories.length > 3) {
            setmessage("You can not pick more than 3 Categories");

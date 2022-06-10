@@ -65,7 +65,6 @@ const index = (props) => {
                         setloadingscreen(false);
                     }).catch(ee => {
                         setloadingscreen(false);
-                        console.log(err);
                     })
                 }
               }
@@ -94,7 +93,6 @@ const index = (props) => {
             sd.docs.map(each => {
                 var x = {id :each.id, albumname : each.data().albumname , images : each.data().images}
                 tmp.push(x);
-                console.log(x);
             })
             setallalbums(tmp);
             setloadingscreen(false);
@@ -189,7 +187,6 @@ const index = (props) => {
                     }).catch(ee => {
                         setloadingscreen(false);
                         setdisplaynewalbumdialog(false);
-                        console.log(err);
                     })
         
         
