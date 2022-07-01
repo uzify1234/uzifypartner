@@ -139,7 +139,6 @@ const index = (props) => {
 
                         // var desertRef = firebase.storage().child('partners/'+userid+'/workimages/');
                         // desertRef.delete().then(function() {
-                        // console.log("DELETEDDDDDDD");
                         // }).catch(function(error) {
                         // // Uh-oh, an error occurred!
                         // });

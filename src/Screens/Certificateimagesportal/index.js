@@ -248,7 +248,7 @@ const index = (props) => {
         setloadingscreen(true);
         var exisitngarray = [];
         task.put(blob).then(() => {
-            task.getDownloadURL().then((url) => { console.log(url)
+            task.getDownloadURL().then((url) => { 
                 db.collection('partners').doc(userid).collection('certificateimages').doc("certificateimages").get().then(olddata => {
                     if(olddata.data() != undefined) {
                         if(olddata.data().images != undefined) {

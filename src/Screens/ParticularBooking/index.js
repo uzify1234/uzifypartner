@@ -149,7 +149,11 @@ const index = (props) => {
         if(totaltime < 2 * 60) {
             totaltime = 120;
         }
-        var endddts = ddts + (totaltime * 60);
+        var needanyextraprovision = 0;
+        if(totaltime > 120) {
+          needanyextraprovision = totaltime - 120;
+        }
+        var endddts = item.data.endtimeepoc + (needanyextraprovision * 60);
         if(Number(item.mincredits) > currentusercredits) {
             Alert.alert(
                 "Insufficient Credits",
@@ -173,11 +177,11 @@ const index = (props) => {
                     credits : (currentusercredits - Number(item.mincredits))
                 }).then(creditsdone => {
                     db.collection('partners').doc(currentuser.uid).collection('worktime').doc(item.id).set({
-                        start : ddts,
+                        start : item.data.starttimeepoc,
                         end : endddts
                     }).then(ddfg => {
                         db.collection('partners').doc(currentuser.uid).collection('upcomingbookings').doc(item.id).set({
-                            start : ddts,
+                            start : item.data.starttimeepoc,
                             end : endddts
                         }).then(ddfg => {
                             db.collection('partners').doc(currentuser.uid).collection('bookingsonqueue').doc(item.id).delete().then(ddfg => {

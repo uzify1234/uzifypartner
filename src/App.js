@@ -111,7 +111,6 @@ Notifications.registerTaskAsync(BACKGROUND_NOTIFICATION_TASK);
         return;
       }
       token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log(token);
     } else {
       setfinalstatusnotif('');
       alert('Must use physical device for Push Notifications');

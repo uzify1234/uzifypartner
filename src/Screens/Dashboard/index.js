@@ -164,8 +164,7 @@ const index = () => {
         var today = Math.round((new Date()).getTime() / 1000);
         var totaltime = 0;
        
-        
-       var ddts = handleepocdate(item.data.selecteddate , item.data.selectedtimeslot);
+      //  var ddts = handleepocdate(item.data.selecteddate , item.data.selectedtimeslot);
        
         
         item.data.cart.map(eachcart => {
@@ -177,17 +176,19 @@ const index = () => {
         if(totaltime < 2 * 60) {
             totaltime = 120;
         }
-        var endddts = ddts + (totaltime * 60);
+        var needanyextraprovision = 0;
+        if(totaltime > 120) {
+          needanyextraprovision = totaltime - 120;
+        }
+        var endddts = item.data.endtimeepoc + (needanyextraprovision * 60);
         var condstarttime = item.data.starttimeepoc;
         var coend = condstarttime + (totaltime * 60);
         db.collection('partners').doc(currentuser.uid).collection('worktime').get().then(allwt => {
             var evenfound = true;
             allwt.docs.map(eachdoct => {
-      
-                if((condstarttime >= eachdoct.data().start && condstarttime <= eachdoct.data().end) || (coend >= eachdoct.data().start && coend <= eachdoct.data().end))
+                if((condstarttime >= eachdoct.data().start && condstarttime <= eachdoct.data().end) || (endddts >= eachdoct.data().start && endddts <= eachdoct.data().end))
                 {
-                    evenfound = false;
-                    
+                    evenfound = false; 
                 }
             })
             if(evenfound == true) {
@@ -214,11 +215,11 @@ const index = () => {
                         credits : (currentusercredits - Number(item.mincredits))
                     }).then(creditsdone => {
                         db.collection('partners').doc(currentuser.uid).collection('worktime').doc(item.id).set({
-                            start : ddts,
+                            start : item.data.starttimeepoc,
                             end : endddts
                         }).then(ddfg => {
                             db.collection('partners').doc(currentuser.uid).collection('upcomingbookings').doc(item.id).set({
-                                start : ddts,
+                                start : item.data.starttimeepoc,
                                 end : endddts
                             }).then(ddfg => {
                                 db.collection('partners').doc(currentuser.uid).collection('bookingsonqueue').doc(item.id).delete().then(ddfg => {
