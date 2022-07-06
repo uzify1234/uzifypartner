@@ -14,6 +14,7 @@ import Customtext from '../../components/Customtext';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import CachedImage from 'react-native-expo-cached-image';
+import { Alert } from 'react-native';
 
 
 
@@ -46,6 +47,48 @@ const index = () => {
           trigger: { seconds: 2 },
         });
       }   
+
+
+      const deleteaccount = () => {
+        Alert.alert(
+          "Are you sure you want to delete your account, this will remove all your details stored ? ",
+          "",
+          [
+            {
+              text: "Yes",
+              onPress: () => {processdeletion()},
+              style: "cancel"
+            },
+            {
+              text: "No",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            }
+          ]
+        );
+      }
+  
+      const processdeletion = () => {
+          var idtarget = "8tQwRXvhdsOea55k1JfcueYytJv1";
+        db.collection('partners').doc(idtarget).collection('upcomingbookings').get().then(alldats => {
+          if(alldats.docs.length === 0) {
+            db.collection('partners').doc(idtarget).delete().then(donedel => {
+              firebase.auth().currentUser.delete().then(function () {
+                alert("Your account has been deleted");
+                db.collection('users').doc(idtarget).delete().then(donedel => {});
+                logoutuser();
+              }).catch(function (error) {
+                console.error({error})
+              })
+            }).catch(err => {
+              alert("We can not delete your account currently, Try again after sometime");
+            })
+          }
+          else {
+            alert("You already have upcoming booking(s), you can delete your account only after its completion");
+          }
+        })
+      }
   
     useEffect(() => {
         firebase.auth().onAuthStateChanged((user) => {
@@ -66,7 +109,7 @@ const index = () => {
             else {
             }
          });
-    }, [needmorefetch])
+    }, [needmorefetch]);
 
     const logoutuser = () => {
         firebase.auth().signOut().then(() => {
@@ -116,6 +159,8 @@ const index = () => {
                         
                         <TouchableOpacity style={{marginBottom : 12,display : 'flex' , alignItems : 'center',flexDirection : 'row',borderRightColor : 'transparent',borderLeftColor : 'transparent' , borderTopColor : 'transparent', borderBottomColor : LIGHTPINK, borderWidth : 1,paddingBottom : 7}}><MaterialIcons name="ios-share" size={24} color={DEEPPINK} /><Customtext type='light' style={{marginLeft : 8, fontWeight : '700'}}>Share Uzify</Customtext></TouchableOpacity>
                         {/* <TouchableOpacity onPress={() => navigation.navigate(PARTICULARBOOKING,{bookingid : '7Y76j2PrdHhZNRXMh7CS'})}  style={{marginBottom : 12,display : 'flex' , alignItems : 'center',flexDirection : 'row',borderRightColor : 'transparent',borderLeftColor : 'transparent' , borderTopColor : 'transparent', borderBottomColor : LIGHTPINK, borderWidth : 1,paddingBottom : 7}}><MaterialIcons name="star-rate" size={24} color={DEEPPINK} /><Customtext type='light' style={{marginLeft : 8, fontWeight : '700'}}>Rate Uzify</Customtext></TouchableOpacity> */}
+                        <TouchableOpacity onPress={deleteaccount} style={{marginBottom : 12,display : 'flex' , alignItems : 'center',flexDirection : 'row',borderRightColor : 'transparent',borderLeftColor : 'transparent' , borderTopColor : 'transparent', borderBottomColor : LIGHTPINK, borderWidth : 1,paddingBottom : 7}}><MaterialIcons name="ios-share" size={24} color={DEEPPINK} /><Customtext type='light' style={{marginLeft : 8, fontWeight : '700'}}>Delete my account</Customtext></TouchableOpacity>
+
                         <TouchableOpacity onPress={logoutuser} style={{marginBottom : 12,display : 'flex' , alignItems : 'center',flexDirection : 'row',borderRightColor : 'transparent',borderLeftColor : 'transparent' , borderTopColor : 'transparent', borderBottomColor : LIGHTPINK, borderWidth : 1,paddingBottom : 7}}><MaterialCommunityIcons name="logout" size={24} color={DEEPPINK} /><Customtext type='light' style={{marginLeft : 8, fontWeight : '700'}}>Logout</Customtext></TouchableOpacity>
 
                     </View>
